@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>零知识证明(一)，前置知识</title>
+    <link href="/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/"/>
+    <url>/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="零知识证明（一），前置知识"><a href="#零知识证明（一），前置知识" class="headerlink" title="零知识证明（一），前置知识"></a>零知识证明（一），前置知识</h1><h2 id="初等数论"><a href="#初等数论" class="headerlink" title="初等数论"></a>初等数论</h2><h2 id="初等群论"><a href="#初等群论" class="headerlink" title="初等群论"></a>初等群论</h2><h2 id="基本密码学原语"><a href="#基本密码学原语" class="headerlink" title="基本密码学原语"></a>基本密码学原语</h2><h3 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h3><h3 id="加密和签名方案"><a href="#加密和签名方案" class="headerlink" title="加密和签名方案"></a>加密和签名方案</h3><h3 id="密码累加器"><a href="#密码累加器" class="headerlink" title="密码累加器"></a>密码累加器</h3><h2 id="代数-多项式基础"><a href="#代数-多项式基础" class="headerlink" title="代数-多项式基础"></a>代数-多项式基础</h2><h3 id="多项式的基本操作"><a href="#多项式的基本操作" class="headerlink" title="多项式的基本操作"></a>多项式的基本操作</h3><h3 id="多项式乘法和除法"><a href="#多项式乘法和除法" class="headerlink" title="多项式乘法和除法"></a>多项式乘法和除法</h3><h3 id="拉格朗日插值概率多项式恒等式测试域扩展"><a href="#拉格朗日插值概率多项式恒等式测试域扩展" class="headerlink" title="拉格朗日插值概率多项式恒等式测试域扩展"></a>拉格朗日插值概率多项式恒等式测试域扩展</h3><h3 id="快速傅立叶变换"><a href="#快速傅立叶变换" class="headerlink" title="快速傅立叶变换"></a>快速傅立叶变换</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>零知识证明</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Elliptci curve cryptography</title>
+    <link href="/2023/09/03/Elliptci-curve-cryptography/"/>
+    <url>/2023/09/03/Elliptci-curve-cryptography/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Elliptic-curve-cryptography-ECC"><a href="#Elliptic-curve-cryptography-ECC" class="headerlink" title="Elliptic curve cryptography(ECC)"></a>Elliptic curve cryptography(ECC)</h2><p>椭圆曲线加密是一种加密数据方法，只有特定人，才能对其进行解密。它在现实生活中有许多应用场景，但其主要应用在于加密互联网上的数据与流量。例如，椭圆加密曲线可以用于确保一封邮件何时发送，且除了收件人外无人可以读取该邮件。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Cryptography</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cryptography</tag>
+      
+      <tag>elliptic curve</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Welcome</title>
+    <link href="/2023/08/29/Welcome/"/>
+    <url>/2023/08/29/Welcome/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
