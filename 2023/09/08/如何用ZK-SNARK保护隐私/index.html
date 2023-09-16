@@ -16,21 +16,26 @@
   <meta name="author" content="Wei Zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="零知识证明（一），前置知识初等数论初等群论基本密码学原语散列函数加密和签名方案密码累加器代数-多项式基础多项式的基本操作多项式乘法和除法拉格朗日插值概率多项式恒等式测试域扩展快速傅立叶变换">
+    <meta name="description" content="使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。 ZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="零知识证明(一)，前置知识">
-<meta property="og:url" content="http://example.com/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="如何用ZK-SNARK保护隐私">
+<meta property="og:url" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="零知识证明（一），前置知识初等数论初等群论基本密码学原语散列函数加密和签名方案密码累加器代数-多项式基础多项式的基本操作多项式乘法和除法拉格朗日插值概率多项式恒等式测试域扩展快速傅立叶变换">
+<meta property="og:description" content="使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。 ZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-03T12:06:36.000Z">
-<meta property="article:modified_time" content="2023-09-03T12:13:38.353Z">
+<meta property="og:image" content="http://example.com/public/img/using_snark/definition.png">
+<meta property="og:image" content="http://example.com/public/img/using_snark/merkle_tree.png">
+<meta property="article:published_time" content="2023-09-08T12:49:14.000Z">
+<meta property="article:modified_time" content="2023-09-13T11:55:24.385Z">
 <meta property="article:author" content="Wei Zhang">
+<meta property="article:tag" content="ZK-SNARK">
+<meta property="article:tag" content="Block Chain">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/public/img/using_snark/definition.png">
   
   
   
-  <title>零知识证明(一)，前置知识 - Hexo</title>
+  <title>如何用ZK-SNARK保护隐私 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="零知识证明(一)，前置知识"></span>
+            <span id="subtitle" data-typed-text="如何用ZK-SNARK保护隐私"></span>
           
         </div>
 
@@ -207,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-03 20:06" pubdate>
-          2023年9月3日 晚上
+        <time datetime="2023-09-08 20:49" pubdate>
+          2023年9月8日 晚上
         </time>
       </span>
     
@@ -219,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          94 字
+          1.2k 字
         
       </span>
     
@@ -230,7 +235,7 @@
         
         
         
-          1 分钟
+          11 分钟
         
       </span>
     
@@ -267,12 +272,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">零知识证明(一)，前置知识</h1>
+            <h1 id="seo-header">如何用ZK-SNARK保护隐私</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="零知识证明（一），前置知识"><a href="#零知识证明（一），前置知识" class="headerlink" title="零知识证明（一），前置知识"></a>零知识证明（一），前置知识</h1><h2 id="初等数论"><a href="#初等数论" class="headerlink" title="初等数论"></a>初等数论</h2><h2 id="初等群论"><a href="#初等群论" class="headerlink" title="初等群论"></a>初等群论</h2><h2 id="基本密码学原语"><a href="#基本密码学原语" class="headerlink" title="基本密码学原语"></a>基本密码学原语</h2><h3 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h3><h3 id="加密和签名方案"><a href="#加密和签名方案" class="headerlink" title="加密和签名方案"></a>加密和签名方案</h3><h3 id="密码累加器"><a href="#密码累加器" class="headerlink" title="密码累加器"></a>密码累加器</h3><h2 id="代数-多项式基础"><a href="#代数-多项式基础" class="headerlink" title="代数-多项式基础"></a>代数-多项式基础</h2><h3 id="多项式的基本操作"><a href="#多项式的基本操作" class="headerlink" title="多项式的基本操作"></a>多项式的基本操作</h3><h3 id="多项式乘法和除法"><a href="#多项式乘法和除法" class="headerlink" title="多项式乘法和除法"></a>多项式乘法和除法</h3><h3 id="拉格朗日插值概率多项式恒等式测试域扩展"><a href="#拉格朗日插值概率多项式恒等式测试域扩展" class="headerlink" title="拉格朗日插值概率多项式恒等式测试域扩展"></a>拉格朗日插值概率多项式恒等式测试域扩展</h3><h3 id="快速傅立叶变换"><a href="#快速傅立叶变换" class="headerlink" title="快速傅立叶变换"></a>快速傅立叶变换</h3>
+                <h2 id="使用ZK-SNARK保护隐私的一些场景"><a href="#使用ZK-SNARK保护隐私的一些场景" class="headerlink" title="使用ZK-SNARK保护隐私的一些场景"></a>使用ZK-SNARK保护隐私的一些场景</h2><p>ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。</p>
+<h3 id="ZK-SNARK如何工作"><a href="#ZK-SNARK如何工作" class="headerlink" title="ZK-SNARK如何工作"></a>ZK-SNARK如何工作</h3><p>假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(x, w) &#x3D; True$，无需展示$w$是什么。此外，验证者即使知道$w$,ZK-SNARK也可以比验证者自己计算$f(x, w)$更快的速度验证证明。<br><strong><img src="/public/img/using_snark/definition.png" srcset="/img/loading.gif" lazyload alt="avatar"></strong><br>这样就给予ZK-SNARK两个属性，隐私性和可扩展性。上述所提，我们接下来的例子讲更为关注隐私性。</p>
+<hr>
+<h3 id="会员资格的证明"><a href="#会员资格的证明" class="headerlink" title="会员资格的证明"></a>会员资格的证明</h3><p>假设你有有个以太坊钱包，你想要证明这个钱包是真人注册同时不透露注册人的信息。 我们可以用下列数学公式来描述这个场景：</p>
+<ul>
+<li>The <strong>private input</strong> ($w$):your address $A$，and the private key $k$ to your address</li>
+<li>The <strong>public input</strong> ($x$):the set of all addresses with verified proof-of-humanity profiles{$H_1…H_n$}</li>
+<li>The <strong>verification function</strong> $f(x,w)$:<ul>
+<li>$w$ as the pair $(A,k)$, and $x$ as the list of {$H_1…H_n$}</li>
+<li>Verify that $A$ is one of the addresses in $x$</li>
+<li>Verify that $PvToAddr(k) &#x3D; A$</li>
+<li>Return $Ture$ if both verifications pass, $False$ if either verification fails</li>
+</ul>
+</li>
+</ul>
+<p>证明者提供他们的地址$A$和他们关联的私钥$k$同时将$w &#x3D; (A,k)$作为私有输入提供给$f$。他们将从链上获得的已验证用户集{$H_1…H_n$}作为公共输入。他们运行ZK-SNARK证明算法，该算法生成他们的输入是否正确的证明。证明者发送这个证明给验证者，同时他们提供获得经过验证的个人资料列表的区块高度。 </p>
+<p>验证者读取证明者指定的链上这个高度的列表同时检查这个证明。如果检查通过，验证者确信证明者是真人的证明。</p>
+<h3 id="上述会员资格证明的优化"><a href="#上述会员资格证明的优化" class="headerlink" title="上述会员资格证明的优化"></a>上述会员资格证明的优化</h3><p>上述证明系统中存在一个缺陷：验证者需要知道整个用户集合同时他们需要花$O(n)$的时间将起输入到ZK-SNARK机制。<br>我们可以通过将包含所有配置文件的链上Merkle根作为公共输入传递来解决这个问题。我们添加一个Merkle证明证明者的账户位于树的相关部分作为另一个私有输入。<br><strong><img src="/public/img/using_snark/merkle_tree.png" srcset="/img/loading.gif" lazyload alt="avatar"></strong>  </p>
+<h3 id="代币和ZK-SNARK"><a href="#代币和ZK-SNARK" class="headerlink" title="代币和ZK-SNARK"></a>代币和ZK-SNARK</h3><p>Zcash和Tornado.cash等项目允许您拥有隐私保护的货币。现在你可以根据上面“ZK proof of humanity”，但不是证明他对配置文件的访问权限，而是使用它来证明对代币的访问权限。但是，我们必须解决隐私保护和双花问题。</p>
+
                 
               </div>
             
@@ -290,7 +314,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E/" class="category-chain-item">零知识证明</a>
+  <a href="/categories/ZKP/" class="category-chain-item">ZKP</a>
   
   
 
@@ -302,6 +326,15 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ZK-SNARK/" class="print-no-link">#ZK-SNARK</a>
+      
+        <a href="/tags/Block-Chain/" class="print-no-link">#Block Chain</a>
+      
+    </div>
+  
 </div>
 
 
@@ -310,8 +343,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>零知识证明(一)，前置知识</div>
-      <div>http://example.com/2023/09/03/零知识证明-一-，前置知识/</div>
+      <div>如何用ZK-SNARK保护隐私</div>
+      <div>http://example.com/2023/09/08/如何用ZK-SNARK保护隐私/</div>
     </div>
     <div class="license-meta">
       
@@ -323,7 +356,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月3日</div>
+          <div>2023年9月8日</div>
         </div>
       
       
@@ -355,18 +388,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/" title="如何用ZK-SNARK保护隐私">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">如何用ZK-SNARK保护隐私</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/03/Elliptci-curve-cryptography/" title="Elliptci curve cryptography">
-                        <span class="hidden-mobile">Elliptci curve cryptography</span>
+                      <a href="/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/" title="零知识证明(一)，前置知识">
+                        <span class="hidden-mobile">零知识证明(一)，前置知识</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
