@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/definition.png">
 <meta property="og:image" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/merkle_tree.png">
 <meta property="article:published_time" content="2023-09-08T12:49:14.000Z">
-<meta property="article:modified_time" content="2023-09-16T12:53:45.242Z">
+<meta property="article:modified_time" content="2023-09-18T02:10:16.195Z">
 <meta property="article:author" content="Wei Zhang">
 <meta property="article:tag" content="ZK-SNARK">
 <meta property="article:tag" content="Block Chain">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.7k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          11 分钟
+          14 分钟
         
       </span>
     
@@ -298,7 +298,18 @@
 <p>验证者读取证明者指定的链上这个高度的列表同时检查这个证明。如果检查通过，验证者确信证明者是真人的证明。</p>
 <h3 id="上述会员资格证明的优化"><a href="#上述会员资格证明的优化" class="headerlink" title="上述会员资格证明的优化"></a>上述会员资格证明的优化</h3><p>上述证明系统中存在一个缺陷：验证者需要知道整个用户集合同时他们需要花$O(n)$的时间将起输入到ZK-SNARK机制。<br>我们可以通过将包含所有配置文件的链上Merkle根作为公共输入传递来解决这个问题。我们添加一个Merkle证明证明者的账户位于树的相关部分作为另一个私有输入。 </p>
 <p><img src="merkle_tree.png" srcset="/img/loading.gif" lazyload alt="merkle_tree"></p>
-<h3 id="代币和ZK-SNARK"><a href="#代币和ZK-SNARK" class="headerlink" title="代币和ZK-SNARK"></a>代币和ZK-SNARK</h3><p>Zcash和Tornado.cash等项目允许您拥有隐私保护的货币。现在你可以根据上面“ZK proof of humanity”，但不是证明他对配置文件的访问权限，而是使用它来证明对代币的访问权限。但是，我们必须解决隐私保护和双花问题。</p>
+<h3 id="代币和ZK-SNARK"><a href="#代币和ZK-SNARK" class="headerlink" title="代币和ZK-SNARK"></a>代币和ZK-SNARK</h3><p>Zcash和Tornado.cash等项目允许您拥有隐私保护的货币。现在你可以根据上面“ZK proof of humanity”，但不是证明他对配置文件的访问权限，而是使用它来证明对代币的访问权限。但是，我们必须解决隐私保护和双花问题。<br>这里我们将要解决他们。拥有代币的人都有一个私人秘密$s$。本地电脑计算这个叶子结点$L = (s, 1)$（这个叶子结点被公布在链上并且成为状态），$N = hash(s,2)$（nulliier)。这个状态会被存在默克尔树上。</p>
+<p>如果想使用这个代币，发送者必须在这里使用ZK-SNARK：</p>
+<ul>
+<li>The <strong>public input</strong> contains a <strong>nullifier</strong> $N$, the current or recent <strong>Merkle root</strong> $R$, and new leaf $l$ ()</li>
+<li>Thw <strong>secret input</strong> contains a secret $s$, a leaf $L$, and a Merkle branch $M$</li>
+<li>The <strong>verification function</strong> checks that;<ul>
+<li>$M$ is a valid branch that proving that $L$ is a leaf in the tree with root $R$, which $R$ is the current Merkle root of the state</li>
+<li>$hash(s,l) = L$</li>
+<li>$hash(s,2) = N$</li>
+</ul>
+</li>
+</ul>
 
                 
               </div>
