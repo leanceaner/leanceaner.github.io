@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/definition.png">
 <meta property="og:image" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/merkle_tree.png">
 <meta property="article:published_time" content="2023-09-08T12:49:14.000Z">
-<meta property="article:modified_time" content="2023-09-18T02:10:16.195Z">
+<meta property="article:modified_time" content="2023-09-18T02:15:31.478Z">
 <meta property="article:author" content="Wei Zhang">
 <meta property="article:tag" content="ZK-SNARK">
 <meta property="article:tag" content="Block Chain">
@@ -235,7 +235,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -306,7 +306,7 @@
 <li>The <strong>verification function</strong> checks that;<ul>
 <li>$M$ is a valid branch that proving that $L$ is a leaf in the tree with root $R$, which $R$ is the current Merkle root of the state</li>
 <li>$hash(s,l) = L$</li>
-<li>$hash(s,2) = N$</li>
+<li>$hash(s,2) = N$<br>这次交易包含nullifier$n$和一个新叶子$L$，我们无需证明叶子结点</li>
 </ul>
 </li>
 </ul>
