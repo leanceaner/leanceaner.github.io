@@ -11,18 +11,18 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Wei Zhang","sameAs":["https://github.com/leanceaner","https://twitter.com/","http://connect.qq.com/widget/shareqq/index.html?url={{post.permalink}}&title={{post.title}}","mailto:leanceaner@gmail.com"],"image":"touxiang.jpeg"},"articleBody":"使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。\nZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \\rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(x, w) = True$，无需展示$w$是什么。此外，验证者即使知道$w$,ZK-SNARK也可以比验证者自己计算$f(x, w)$更快的速度验证证明。 \n\n这样就给予ZK-SNARK两个属性，隐私性和可扩展性。上述所提，我们接下来的例子讲更为关注隐私性。\n\n会员资格的证明假设你有有个以太坊钱包，你想要证明这个钱包是真人注册同时不透露注册人的信息。 我们可以用下列数学公式来描述这个场景：\n\nThe private input ($w$):your address $A$，and the private key $k$ to your address\nThe public input ($x$):the set of all addresses with verified proof-of-humanity profiles{$H_1…H_n$}\nThe verification function $f(x,w)$:\n$w$ as the pair $(A,k)$, and $x$ as the list of {$H_1…H_n$}\nVerify that $A$ is one of the addresses in $x$\nVerify that $PvToAddr(k) = A$\nReturn $Ture$ if both verifications pass, $False$ if either verification fails  \n\n\n\n证明者提供他们的地址$A$和他们关联的私钥$k$同时将$w = (A,k)$作为私有输入提供给$f$。他们将从链上获得的已验证用户集{$H_1…H_n$}作为公共输入。他们运行ZK-SNARK证明算法，该算法生成他们的输入是否正确的证明。证明者发送这个证明给验证者，同时他们提供获得经过验证的个人资料列表的区块高度。 \n验证者读取证明者指定的链上这个高度的列表同时检查这个证明。如果检查通过，验证者确信证明者是真人的证明。\n上述会员资格证明的优化上述证明系统中存在一个缺陷：验证者需要知道整个用户集合同时他们需要花$O(n)$的时间将起输入到ZK-SNARK机制。我们可以通过将包含所有配置文件的链上Merkle根作为公共输入传递来解决这个问题。我们添加一个Merkle证明证明者的账户位于树的相关部分作为另一个私有输入。 \n\n代币和ZK-SNARKZcash和Tornado.cash等项目允许您拥有隐私保护的货币。现在你可以根据上面“ZK proof of humanity”，但不是证明他对配置文件的访问权限，而是使用它来证明对代币的访问权限。但是，我们必须解决隐私保护和双花问题。这里我们将要解决他们。拥有代币的人都有一个私人秘密$s$。本地电脑计算这个叶子结点$L = (s, 1)$（这个叶子结点被公布在链上并且成为状态），$N = hash(s,2)$（nulliier)。这个状态会被存在默克尔树上。\n如果想使用这个代币，发送者必须在这里使用ZK-SNARK：\n\nThe public input contains a nullifier $N$, the current or recent Merkle root $R$, and new leaf $l$ ()\nThw secret input contains a secret $s$, a leaf $L$, and a Merkle branch $M$\nThe verification function checks that;\n$M$ is a valid branch that proving that $L$ is a leaf in the tree with root $R$, which $R$ is the current Merkle root of the state\n$hash(s,l) = L$\n$hash(s,2) = N$这次交易包含nullifier$n$和一个新叶子$L$，我们无需证明叶子结点\n\n\n\n","dateCreated":"2023-09-08T20:49:14+08:00","dateModified":"2023-09-18T10:15:31+08:00","datePublished":"2023-09-08T20:49:14+08:00","description":"","headline":"如何用ZK-SNARK保护隐私","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/"},"publisher":{"@type":"Organization","name":"Wei Zhang","sameAs":["https://github.com/leanceaner","https://twitter.com/","http://connect.qq.com/widget/shareqq/index.html?url={{post.permalink}}&title={{post.title}}","mailto:leanceaner@gmail.com"],"image":"touxiang.jpeg","logo":{"@type":"ImageObject","url":"touxiang.jpeg"}},"url":"http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/","keywords":"ZK-SNARK, Block Chain"}</script>
-    <meta name="description" content="使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。 ZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Wei Zhang","sameAs":["https://github.com/leanceaner","https://twitter.com/","http://connect.qq.com/widget/shareqq/index.html?url={{post.permalink}}&title={{post.title}}","mailto:leanceaner@gmail.com"],"image":"touxiang.jpeg"},"articleBody":"\n使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。\nZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \\rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(x, w) = True$，无需展示$w$是什么。此外，验证者即使知道$w$,ZK-SNARK也可以比验证者自己计算$f(x, w)$更快的速度验证证明。 \n\n这样就给予ZK-SNARK两个属性，隐私性和可扩展性。上述所提，我们接下来的例子讲更为关注隐私性。\n\n会员资格的证明假设你有有个以太坊钱包，你想要证明这个钱包是真人注册同时不透露注册人的信息。 我们可以用下列数学公式来描述这个场景：\n\nThe private input ($w$):your address $A$，and the private key $k$ to your address\nThe public input ($x$):the set of all addresses with verified proof-of-humanity profiles{$H_1…H_n$}\nThe verification function $f(x,w)$:\n$w$ as the pair $(A,k)$, and $x$ as the list of {$H_1…H_n$}\nVerify that $A$ is one of the addresses in $x$\nVerify that $PvToAddr(k) = A$\nReturn $Ture$ if both verifications pass, $False$ if either verification fails  \n\n\n\n证明者提供他们的地址$A$和他们关联的私钥$k$同时将$w = (A,k)$作为私有输入提供给$f$。他们将从链上获得的已验证用户集{$H_1…H_n$}作为公共输入。他们运行ZK-SNARK证明算法，该算法生成他们的输入是否正确的证明。证明者发送这个证明给验证者，同时他们提供获得经过验证的个人资料列表的区块高度。 \n验证者读取证明者指定的链上这个高度的列表同时检查这个证明。如果检查通过，验证者确信证明者是真人的证明。\n上述会员资格证明的优化上述证明系统中存在一个缺陷：验证者需要知道整个用户集合同时他们需要花$O(n)$的时间将起输入到ZK-SNARK机制。我们可以通过将包含所有配置文件的链上Merkle根作为公共输入传递来解决这个问题。我们添加一个Merkle证明证明者的账户位于树的相关部分作为另一个私有输入。 \n\n代币和ZK-SNARKZcash和Tornado.cash等项目允许您拥有隐私保护的货币。现在你可以根据上面“ZK proof of humanity”，但不是证明他对配置文件的访问权限，而是使用它来证明对代币的访问权限。但是，我们必须解决隐私保护和双花问题。这里我们将要解决他们。拥有代币的人都有一个私人秘密$s$。本地电脑计算这个叶子结点$L = (s, 1)$（这个叶子结点被公布在链上并且成为状态），$N = hash(s,2)$（nulliier)。这个状态会被存在默克尔树上。\n如果想使用这个代币，发送者必须在这里使用ZK-SNARK：\n\nThe public input contains a nullifier $N$, the current or recent Merkle root $R$, and new leaf $l$ ()\nThw secret input contains a secret $s$, a leaf $L$, and a Merkle branch $M$\nThe verification function checks that;\n$M$ is a valid branch that proving that $L$ is a leaf in the tree with root $R$, which $R$ is the current Merkle root of the state\n$hash(s,l) = L$\n$hash(s,2) = N$这次交易包含nullifier$n$和一个新叶子$L$，我们无需证明叶子结点\n\n\n\n","dateCreated":"2023-09-08T20:49:14+08:00","dateModified":"2023-09-21T19:00:25+08:00","datePublished":"2023-09-08T20:49:14+08:00","description":"","headline":"如何用ZK-SNARK保护隐私","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/"},"publisher":{"@type":"Organization","name":"Wei Zhang","sameAs":["https://github.com/leanceaner","https://twitter.com/","http://connect.qq.com/widget/shareqq/index.html?url={{post.permalink}}&title={{post.title}}","mailto:leanceaner@gmail.com"],"image":"touxiang.jpeg","logo":{"@type":"ImageObject","url":"touxiang.jpeg"}},"url":"http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/","keywords":"ZK-SNARK, Block Chain"}</script>
+    <meta name="description" content="使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。 ZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="如何用ZK-SNARK保护隐私">
 <meta property="og:url" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。 ZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(">
+<meta property="og:description" content="使用ZK-SNARK保护隐私的一些场景ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。 ZK-SNARK如何工作假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/definition.png">
 <meta property="og:image" content="http://example.com/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/merkle_tree.png">
 <meta property="article:published_time" content="2023-09-08T12:49:14.000Z">
-<meta property="article:modified_time" content="2023-09-18T02:15:31.478Z">
+<meta property="article:modified_time" content="2023-09-21T11:00:25.319Z">
 <meta property="article:author" content="Wei Zhang">
 <meta property="article:tag" content="ZK-SNARK">
 <meta property="article:tag" content="Block Chain">
@@ -328,7 +328,8 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="使用ZK-SNARK保护隐私的一些场景"><a href="#使用ZK-SNARK保护隐私的一些场景" class="headerlink" title="使用ZK-SNARK保护隐私的一些场景"></a>使用ZK-SNARK保护隐私的一些场景</h2><p>ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。</p>
+            <span id="more"></span>
+<h2 id="使用ZK-SNARK保护隐私的一些场景"><a href="#使用ZK-SNARK保护隐私的一些场景" class="headerlink" title="使用ZK-SNARK保护隐私的一些场景"></a>使用ZK-SNARK保护隐私的一些场景</h2><p>ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。</p>
 <h3 id="ZK-SNARK如何工作"><a href="#ZK-SNARK如何工作" class="headerlink" title="ZK-SNARK如何工作"></a>ZK-SNARK如何工作</h3><p>假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(x, w) = True$，无需展示$w$是什么。此外，验证者即使知道$w$,ZK-SNARK也可以比验证者自己计算$f(x, w)$更快的速度验证证明。 </p>
 <p><img src="definition.png" alt="definiation"></p>
 <p>这样就给予ZK-SNARK两个属性，隐私性和可扩展性。上述所提，我们接下来的例子讲更为关注隐私性。</p>
@@ -412,7 +413,7 @@
             <a
                 class="post-action-btn btn btn--default btn-open-shareoptions"
                 href="#btn-open-shareoptions"
-                aria-label="Share this post"
+                aria-label="Diesen Beitrag teilen"
             >
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
@@ -462,7 +463,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -524,7 +525,7 @@
             <a
                 class="post-action-btn btn btn--default btn-open-shareoptions"
                 href="#btn-open-shareoptions"
-                aria-label="Share this post"
+                aria-label="Diesen Beitrag teilen"
             >
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
@@ -574,7 +575,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
