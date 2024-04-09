@@ -6,19 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hexo">
-    <title>归档 - Hexo</title>
+    <title>区块链与密码学 - Hexo</title>
     <meta name="author" content="Wei Zhang">
     
     
     
-    <script type="application/ld+json">{}</script>
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Wei Zhang","sameAs":["https://github.com/leanceaner","https://twitter.com/","http://connect.qq.com/widget/shareqq/index.html?url={{post.permalink}}&title={{post.title}}","mailto:leanceaner@gmail.com"],"image":"touxiang.jpeg"},"articleBody":"对称加密\n特点： 加密解密密钥一致，根据加密方式分为：流密码和分组密码（区块链）\n\n分组密码：将长明文序列分成固定长度的段后，每段分别加密。除了用来加密以外，也可用于构造随机生成器，流密码，消息认证码(MAC)和Hash函数等。包括：DES, IDEA, AES分组密码算法。\n\n应用由于对称密码的特性，导致其在区块链中的应用场景较少。目前主要是在数字钱包的私钥管理中使用，数字钱包根据去中心化程度分为全节点钱包、轻节点钱包和中心化钱包。 三种钱包都提供密钥存储功能，即将用户的私钥、公钥和账户地址存放在一个加密文件中，供用户存储和使用，而这个加密文件就是使用的对称加密方式（用户设置了一个对称加密密码）。 这样即使加密文件泄露了，用户私钥在一段时间内还是安全的，用户应当在加密文件泄露后尽快转移资产到新的私钥对应的账户地址中，并妥善保存新的加密文件。\n\n小结：算法公开，计算量小，加密速度快。不足之处，交易双方都是用同样钥匙，安全性得不到保证，同时还必须在一个绝对安全的通信通道中传输密钥。此外，对称加密算法的安全性取决于密钥的保存情况，如果密钥被多人掌握，那么密钥泄露的概率会大大提高。对称密码一般还应用在区块链网络通信场景中，即TLS协议\n\n比特币官方是用AES加密用户的私钥文件\n\n\n\n非对称加密又称公钥加密算法，弥补了对称加密算法在认证，签名用途上的不足。特点是采用公私钥对，二者具有互补性，即其中任一密钥用于加密，另一密钥都能解密。特点是效率上稍慢些对称密码，优点是安全性更高，常用于数字签名场景。常见的公钥加密算法：RSA, Diffie-Hellman, ElGamal以及ECC（椭圆曲线）算法。其中RSA对应的是大质数分解难题，Diffie和El对应的是离散对数难题，ECC对应椭圆曲线上的离散对数难题，下面仅介绍常见的RSA和ECC算法。\n\nRSA：目前应用最广泛的非对称密码算法，由MIT提出，可直接用于加密和数字签名。RSA广泛用于SSL/TLS传输层协议中。\n\nECC：椭圆曲线密码算法。在许多应用中，ECC取代了RSA，因为相同安全性下，前者的系统参数更短。区块链中使用的就是ECC，例如ECC公钥用于生成比特币地址，区块链的验证使用了ECDSA（DSA基于椭圆曲线的版本）作为数字签名算法。\n\n应用：私钥生成，账户地址生成，交易签名以及网络层的私钥协商等。\n\n小结：算法强度高，安全性依赖于算法与密钥，但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快。另外，非对称加密不需要一个安全信道来传输密钥，它的公钥可以直接公开，用户只需要保存私钥即可。\n\n\nHash函数也叫哈希函数、散列函数、单向加密或杂凑加密算法。它将任一长度的序列作为输入，转换成固定长度的输出，可以是128/160/256比特。多用于消息认证、数据完整性验证和密钥生成等场景。常见Hash函数有MD4/MD5、RipeMD-160、SHA系列函数以及SM3国密算法。\n\nMD5和SHA1都被攻破，不能用于要求安全性较高的场景，区块链使用了SHA-256算法；\n\n1. SHASHA包含SHA-[0~3]共四个系列，见下图（来自维基百科）\nSHA系列应用在很多安全协议中，如TLS、SSL、PGP、SSH、S/MIME和IPSec等。\n1.1 Keccak介绍TODO\n2. RipeMD-160是1996年设计出来的一系列Hash算法，是基于MD4的设计原理而设计的增强版本。RipeMD-160是RipeMD-128的增强版本，用来替代MD4/MD5/RipeMD-128。另外还有RipeMD-256/320这两个是更强的版本，但效率也更低，根据具体场景选用。\n3. Hash函数在区块链中的应用Hash函数在区块链中有着广泛的应用，主要场景包含账户地址生成、Merkle树、交易ID生成等。\nPKIPublic Key Infrastructure(公钥基础设施)是一个包括硬件、软件、人员、策略和规程的集合，用来实现基于公钥加密体制的密钥和数字证书的产生、管理、存储、分发和撤销等功能。使在网络世界中的用户可以通过数字证书进行身份认证，从而实现安全通信。\n1. PKI组成一个典型的PKI包括PKI策略、软硬件系统、CA（Certificate Authority，证书机构）、RA（Registration Authority，注册机构）、证书发布系统和PKI应用等。\n1.1 PKI策略PKI策略建立了一个组织信息安全的指导方针，同时定义了密码系统的使用方法和原则。一般包含两种类型的策略：\n\n证书策略。管理证书使用\nCPS（Certificate Practice Statement，证书操作声明）。包含CA运作方式、证书签发、吊销流程以及用户密钥生成、存储和传递方式。外界可通过CPS分析PKI可信度。\n\n1.2 CACA是PKI的信任基础，它可以发放证书、设置证书有效期、掌管证书吊销列表（CRL）实现证书的吊销、管理用户密钥等。\nCA掌管公钥的整个生命周期，用于签发、吊销、更新数字证书等。\n\n数字证书是一个用来证明公钥拥有者身份的电子文件，其中包含公钥信息、拥有者的身份信息，以及CA对这份证书的签名等信息。比如，我们可以通过浏览器很方便的查询某个启用HTTPS的网站的证书信息（具体步骤可自行查询）。为了方便数字证书的验证，ITU-T（国际电信联盟电信标准化部门）规定了一个统一证书格式X.509，X.509标准目前有V1,V2,V3三个标准。\nCRL用于验证证书的有效性。证书吊销后，CA通过更新CRL来通知各相关方那些证书失效了。X.509标准规定了CRL的格式，限于篇幅不列出。\n双证书服务。上面描述的数字证书指的是签名证书，许多CA提供双证书服务，即在提供签名证书同时，为用户生成一张加密证书。该证书中存储了一个对称加密密钥，这个密钥通常由签名证书中的公钥派生而来。加密证书产生后使用签名证书中的公钥进行加密，与签名证书一起发给用户，用户可以使用私钥对加密证书进行解密，以获得加密密钥。如果使用的是单证书服务，那么网站就使用签名证书来进行（私钥）签名和（公钥）加密（数据传输）操作；但如果使用双证书服务，签名证书就只负责签名（以便用户验证网站身份），不再使用签名证书中的公钥负责加密数据传输，而使用加密证书中的密钥就负责加密功能。另外，CA一般会留存加密证书中的密钥，以便政府监管和网站遗失加密证书时申请恢复。\nKMC是密钥管理中心，在CA中负责密钥生成、管理、更新、恢复和查询的功能。KMC通常只是CA服务器上运行的一个组件，不是一个单独机构。\n\n\n另外，这部分内容还包含证书申请与吊销流程、证书链与证书验证流程，由于不是本文重点，所以此处不再赘述，有兴趣的读者请自行查询相关内容。\n\n1.3 RARA是用户和CA之间的桥梁，它可以获取、认证用户的身份，然后向CA发送申请证书的请求。对于规模较小的PKI来说，RA的功能可以整合到CA中，以节约成本，但是PKI国际标准建议使用独立的RA来实现用户注册功能，以提高PKI系统安全性。\n1.4 证书发布系统实现证书的发放，可以通过LDAP服务器供用户进行证书及CRL的下载。\n1.5 PKI应用是基于PKI的证书和密钥使用特定功能的一些系统，如VPN、TLS协议等，它们的实现原理都是基于PKI的数字证书实现身份认证，然后使用非对称加密实现密钥协商。\n2. PKI与区块链在公链中，节点可自由上下链，没有任何门槛。但在联盟链中，节点准入需要授权，而且需要对节点进行访问控制。仅使用数字签名技术无法实现身份认证和访问控制，所以也需要一个数字证书将密钥和密钥拥有者身份信息联系起来，从而实现对应功能。\n联盟链中的节点主要与链内节点通信，所以节点证书不一定由外部第三方可信CA产生，区块链内部被大多数节点信任的一个或多个CA就能满足联盟链网络中各节点间身份认证的需求。除了CA，区块链还需要一个实现密钥的生成与管理等功能的服务，在联盟中这个服务通常称为MSP（member service provider）。\nMSP是区块链上一个身份认证和权限管理的抽象逻辑组件，认证的范围是所有可能与本网络建立联系的节点，只有经过授权的节点才能通过验证。区块链上证书的验证过程，依旧是「证书链」的验证过程，即直到找到一个颁发者是区块链上的可信CA，证书验证才完成，所以MSP还要维护一份CRL，以及自己可信的CA列表（内容是CA证书列表），这两份列表在验证节点身份时发挥重要作用。MSP的配置文件还可以配置相应的安全策略，如是否对RPC请求来源进行验证、是否验证对等节点身份、是否采用分布式CA等。MSP使用配置文件初始化后，可以实现签名、验签、密钥生成等具体功能。\n2.1 区块链中的CA大体分两种，一种是本地CA，本地系统掌握私钥；另一种是远程CA，远程系统掌握私钥，如CFCA（中国金融认证中心）。根据是否需要配置相同的可信CA列表，区块链中的CA可分为两种：中心式CA和分布式CA，趣链区块链平台支持这两种CA。\n【一、中心式CA】在中心式CA中，所有节点都需要配置一个CRL及一个相同的可信CA列表（内容为CA证书列表），这些证书可以是本地CA或远程CA证书。在节点通信时，根据本地的两个CA列表对对方节点发来的证书进行验证其合法性，同时也发送自己的证书给对方验证。\n【二、分布式CA】在分布式CA中，所有节点依然需要配置一个CRL，但是不需要为节点配置相同的可信CA列表，需要配置网络内所有CA对本节点颁发的证书，在与不同节点通信时，只需要使用该节点支持的CA颁发的证书。为了实现节点的动态添加，在分布式CA中，仅支持本地CA，不支持远程CA，因此每个节点本质上都是一个CA。新节点在加入后，需要向本网络中的所有CA申请证书，并记录在指定文件中，这样节点在重启后可以顺利地与其他节点进行通信。\n2.2 不同类型的证书为了实现对节点和其他外部连接的访问控制，通常需要设计多种证书类型，节点持有不同类型的证书，代表拥有不同权限。例如，趣链区块链平台支持三种证书类型：SDK证书、节点准入证书、CA证书。使用SDK访问链上数据时，需要提供SDK证书，否则不能建立连接；普通节点在加入区块链网络时，需要提供节点准入证书；验证这些证书需要CA证书支持。\nMerkle树译为默克尔树，也称哈希树。是存储hash值的一棵树。其叶子节点是原始数据的hash值，非叶节点是其子节点串联字符串的hash值。Merkle树可以看做是hash列表的泛化，通过构造树形结构的hash验证路径，可以对完整数据的单个分支单独完成验证，一定程度上这提高了完整性验证的效率。\n1. 基于hash列表的完整性校验hash列表可用于P2P网络数据传输的完整性校验。在P2P网络中，原始大数据块被分割成多个小数据块实现分布式下载，最后合成完整的大数据块。这时可以通过构造hash列表实现对多个小数据块的完整性校验。大概过程：先计算每个小数据块的hash值，这些hash值级联在一起做一次hash计算，就得到hash列表的根hash。下载数据时，首先从可信数据源得到正确的根hash，便可以用来校验hash列表的正确性，进而校验整个数据块的完整性。结构如下图\n基于Merkle树的完整性校验它的大致结构和hash列表类似，不同的是它的相邻节点会合并计算一个新的hash值作为上一层节点，若这一层是奇数个节点，则最后一个节点的hash值直接呈上。以此计算，最终获得一个根节点和所有内部节点。在P2P网络下载之前，可以先从可信节点获得文件的Merkle树根节点，然后再从其他不可信节点获取树的子节点。与hash列表不同的是，Merkle树可以下载验证一个单独分支，如果分支节点损坏，只需重新下载分支节点。当文件较大时，Merkle树的效率显著高于Hash列表。Merkle树多指完全二叉树，也可以是完全多叉树。结构如下图\n\n数字签名技术是指使用私密对数据进行一种密码运算生成的一串字符，用来代替手写签名或印章。在某些场景中，需要确认消息来源，防止欺诈或消息伪造，通常使用的技术就是数字签名。\n1. 原理数字签名技术是随着公钥密码算法（非对称加密）发展起来的，在身份验证、数据源认证、完整性保护、不可否认性方面有重要用途。它主要包括两部分：签名生成和签名验证。过程是：选择一种公钥算法，使用私钥加密原数据得到签名字符串，验证方使用公钥和该算法进行解密操作，若解密后的数据与收到的源数据的摘要一致则说明签名有效。详细步骤：\n\n验证方通过可信途径获得签名者的公钥，例如可通过公钥数字证书获得；\n接收到签名后，计算原数据的摘要，并使用验证算法进行验证，通过摘要比对是否一致来判断签名的有效性；2. 可选方案\n\n\nRSA签名\n椭圆曲线签名方案（ECDSA）\n\n零知识证明（Zero—Knowledge Proof，ZKP）\n本节内容主要参考自：https://zhuanlan.zhihu.com/p/152065162零知识证明学习资源索引：https://learnblockchain.cn/2019/11/08/zkp-info\n\n它是在20世纪80年代初提出的，指的是证明者能够向验证者证明自己拥有某个秘密，而不暴露该秘密，即给外界的「知识」为零。它还分为交互式~和非交互式~。\n零知识证明具有以下三个重要的性质：\n\n完备性（Completeness）：只要证明者拥有相应的知识，那么就能通过验证者的验证，即证明者有足够大的概率使验证者确信。；\n可靠性（Soundness）：如果证明者没有相应的知识，则无法通过验证者的验证，即证明者欺骗验证者的概率可以忽略;\n零知识性（Zero-Knowledge）：证明者在交互过程中仅向验证者透露是否拥有相应知识的陈述，不会泄露任何关于知识的额外信息。\n\n从零知识证明定义中可以提取到两个关键词：“不泄露信息”，“证明论断有效”，基于这两个特点扩展出零知识证明在区块链上的两大应用场景：\n隐私：在隐私场景中，我们可以借助零知识证明的“不泄露信息”特性，在不泄漏交易的细节（接收方，发送方，交易余额）的情况下证明区块链上的资产转移是有效的。扩容：在扩容场景中，我们不太需要关注零知识证明技术的“不泄露信息”这个特性，我们的关注重点是它的“证明论断有效”这个特性，由于链上资源是有限的，所以我们需要把大量的计算迁移到链下进行，因此需要有一种技术能够证明这些在链下发生的动作是可信的，零知识证明正好可以帮助我们做链下可信计算的背书。\n1. 交互式零知识证明（Interactive Zero-Knowledge, IZK）证明者和验证者双方按照一个协议，通过一系列交互，最终验证者会得出一个明确的结论，证明者是或不掌握这个秘密。\n2. 非交互式零知识证明（Non-Interactive Zero-Knowledge, NIZK）交互式零知识证明协议依赖于验证者的随机尝试，需要证明者和验证者进行多次交互才能完成。非交互式零知识证明，将交互次数减少到一次，可实现离线证明和公开验证。\n\n区块链系统使用的就是这种，因为在区块链系统中，不能假设双方一直在线进行交互，在区块链网络上，证明者只要向全网广播一条证明交易，网络上的矿工在将这条交易打包到区块中的时候就帮验证者完成了零知识证明的校验。\n\n3. 发展历史\n1985 年，零知识证明Zero-Knowledge Proof - 由 S.Goldwasser、 S.Micali 及 C.Rackoff 首次提出。\n2010年，Groth实现了首个基于椭圆曲线双线性映射全能的，常数大小的非交互式零知识证明协议。后来这个协议经过不断优化，最终成为区块链著名的零知识证明协议SNARKs。\n2013年，Pinocchio协议实现了分钟级别证明，毫秒级别验证，证明大小不到300字节，将零知识证明从理论带到了应用。后来Zcash使用的SNARKs正是基于Pinocchio的改进版。\n2014 年，名为Zerocash的加密货币则使用了一种特殊的零知识证明工具zk-SNARKs （ Zero-Knowledge Succinct Non-interactive Arguments of Knowledge ) 实现了对交易金额、交易双方的完全隐藏，更注重于隐私，以及对交易透明的可控性。\n2017 年， Zerocash 团队提出将 zk-SNARKs 与智能合约相互结合的方案，使交易能在众目睽睽下隐身，打造保护隐私的智能合约。\n\n零知识证明开发工具目前，为了解决零知识证明技术的广泛应用需求，产生了多个用于实现zk-SNARK 零知识证明协议工程化的开源算法库，包括 libsnark、bellman、ZoKrates 等等。\n4. 区块链如何应用零知识证明4.1 隐私例如在比特币交易过程中，一笔交易是否合法，实际只需验证三件事：\n\n发送方确实拥有这么多钱\n发送方转的钱和接收方收的钱一致\n发送方的钱对应数额确实被销毁了\n\n整个证明过程中，矿工其实并不关心具体花掉了多少钱，发送者具体是谁，接受者具体是谁。矿工只关心系统的钱是不是守恒的。Zcash(大零币)就是用这个思路实现了隐私交易。\n4.2 扩容早期的公链项目的TPS非常低，如比特币的TPS约为7，以太坊TPS约为15，这意味着以太坊每秒只能处理15笔交易，如此低的TPS严重限制了区块链应用的大规模落地，所以有人开始研究区块链扩容的问题，目的就是为了提高链上的TPS。但区块链扩容受到Vitalik提出的不可能三角的限制，不可能三角是指区块链系统设计无法同时兼顾可扩展性，去中心化和安全性，三者只能取其二。这是一个很让人失望的结论，但我们必须知道，一切事物都有自己的边界，公链不应该做所有的事情，公链应该做它该做的事情：“公链是以最高效率达成共识的工具，能够以最低成本来构建信任”。  \n作为共识的工具，信任的引擎，公链不应该为了可扩展性放弃去中心化与安全性。那么公链的TPS这么低，该怎么使用呢？我们是否可以将大量的工作放到链下去解决，仅仅将最重要的数据提交到区块链主链上，让所有节点都能够验证这些链下的工作都是准确可靠的呢？社会的发展带来的是更精细化的分工，区块链的技术发展也是如此，在底层区块链（Layer1）上构建一个扩展层（Layer2)，Layer1来保证安全和去中心化，绝对可靠、可信；它能做到全球共识，并作为“加密法院”，通过智能合约设计的规则进行仲裁，以经济激励的形式将信任传递到Layer2 上，而Layer2追求极致的性能，它只能做到局部共识，但是能够满足各类商业场景的需求。\n链下扩容ZK-Rollup就是基于零知识证明的二层扩容方案， ZK-Rollup方案起源于18年下半年，由Barry Whitehat和Vitalik先后提出。Rollup顾名思义有“卷起”和“汇总”的意思，将大量的交易“卷起/汇总”打包成一个交易。ZK-Rollup的原理一句话就可以讲清楚：链下进行复杂的计算和证明的生成，链上进行证明的校验并存储部分数据保证数据可用性。ZK-Rollup数据可用性可以让任何人都能根据链上存储的交易数据，还原出账户的全局状态。\nBase58编码方案是一种58进制编码方案，与Base64类似，是一种基于58个可打印字符来表示二进制数据的方法。这些可打印字符包含了阿拉伯数字，大小写英文字母。在Base64基础上去掉了6个易混淆字符，如数字0，大写O，小写L，大写i以及+/，以便在任何字体中都能肉眼区分字符。\n\nBase58和Base64的缺点是会造成信息冗余，输出比输入大许多，所以这种编码方案只适合小数据。而且Base58与Base64不同的是，前者采用大数进制转换，效率更低，所以使用场景更少。\n\nBase64普通应用于URL，短文本，图片；Base58一般用在比特币地址、私钥和脚本哈希场景。\n","dateCreated":"2024-04-09T09:09:21+08:00","dateModified":"2024-04-09T10:07:00+08:00","datePublished":"2024-04-09T09:09:21+08:00","description":"","headline":"区块链与密码学","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"},"publisher":{"@type":"Organization","name":"Wei Zhang","sameAs":["https://github.com/leanceaner","https://twitter.com/","http://connect.qq.com/widget/shareqq/index.html?url={{post.permalink}}&title={{post.title}}","mailto:leanceaner@gmail.com"],"image":"touxiang.jpeg","logo":{"@type":"ImageObject","url":"touxiang.jpeg"}},"url":"http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"}</script>
+    <meta name="description" content="对称加密 特点： 加密解密密钥一致，根据加密方式分为：流密码和分组密码（区块链）  分组密码：将长明文序列分成固定长度的段后，每段分别加密。除了用来加密以外，也可用于构造随机生成器，流密码，消息认证码(MAC)和Hash函数等。包括：DES, IDEA, AES分组密码算法。  应用由于对称密码的特性，导致其在区块链中的应用场景较少。目前主要是在数字钱包的私钥管理中使用，数字钱包根据去中心化程度分">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="区块链与密码学">
+<meta property="og:url" content="http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="对称加密 特点： 加密解密密钥一致，根据加密方式分为：流密码和分组密码（区块链）  分组密码：将长明文序列分成固定长度的段后，每段分别加密。除了用来加密以外，也可用于构造随机生成器，流密码，消息认证码(MAC)和Hash函数等。包括：DES, IDEA, AES分组密码算法。  应用由于对称密码的特性，导致其在区块链中的应用场景较少。目前主要是在数字钱包的私钥管理中使用，数字钱包根据去中心化程度分">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/images/hash_func_cmp.png">
+<meta property="og:image" content="http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/images/hash_tree.jpg">
+<meta property="og:image" content="http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/images/merkle_tree.jpg">
+<meta property="article:published_time" content="2024-04-09T01:09:21.000Z">
+<meta property="article:modified_time" content="2024-04-09T02:07:00.507Z">
 <meta property="article:author" content="Wei Zhang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/images/hash_func_cmp.png">
     
     
         
@@ -39,6 +47,8 @@
     
 
     
+        
+    
 </head>
 
     <body>
@@ -52,7 +62,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -85,7 +95,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -281,30 +291,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
-                            aria-label=": 区块链与密码学"
-                        >
-                            区块链与密码学
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            区块链与密码学
+        </h1>
+    
+    
+        <div class="post-meta">
     <time datetime="2024-04-09T09:09:21+08:00">
 	
 		    2024 年 4 月 9 日
@@ -313,10 +315,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h2><ul>
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h2><ul>
 <li><p>特点： 加密解密密钥一致，根据加密方式分为：流密码和分组密码（区块链）</p>
 </li>
 <li><p>分组密码：将长明文序列分成固定长度的段后，每段分别加密。除了用来加密以外，也可用于构造随机生成器，流密码，消息认证码(MAC)和Hash函数等。包括：DES, IDEA, AES分组密码算法。</p>
@@ -432,304 +437,114 @@
 </blockquote>
 <p>Base64普通应用于URL，短文本，图片；Base58一般用在比特币地址、私钥和脚本哈希场景。</p>
 
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
             
+
+
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/"
-                            aria-label=": 如何用ZK-SNARK保护隐私"
-                        >
-                            如何用ZK-SNARK保护隐私
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2023-09-08T20:49:14+08:00">
-	
-		    2023 年 9 月 8 日
-    	
-    </time>
-    
-        <span>发布在 </span>
         
-    <a class="category-link" href="/categories/ZKP/">ZKP</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <span id="more"></span>
-<h2 id="使用ZK-SNARK保护隐私的一些场景"><a href="#使用ZK-SNARK保护隐私的一些场景" class="headerlink" title="使用ZK-SNARK保护隐私的一些场景"></a>使用ZK-SNARK保护隐私的一些场景</h2><p>ZK-SNARK 是一种强大的加密工具，也是人们在区块链领域及其他领域构建的应用程序中日益重要的一部分。</p>
-<h3 id="ZK-SNARK如何工作"><a href="#ZK-SNARK如何工作" class="headerlink" title="ZK-SNARK如何工作"></a>ZK-SNARK如何工作</h3><p>假设你有个公共输入$x$，一个私有输入$w$，还有一个公共函数$f(x, w) \rightarrow {True, False}$对输入执行某种验证。使用ZK-SNARK，你可以证明某个$w$对于给定的一些$f$和$x$得到$f(x, w) = True$，无需展示$w$是什么。此外，验证者即使知道$w$,ZK-SNARK也可以比验证者自己计算$f(x, w)$更快的速度验证证明。 </p>
-<p><img src="definition.png" alt="definiation"></p>
-<p>这样就给予ZK-SNARK两个属性，隐私性和可扩展性。上述所提，我们接下来的例子讲更为关注隐私性。</p>
-<hr>
-<h3 id="会员资格的证明"><a href="#会员资格的证明" class="headerlink" title="会员资格的证明"></a>会员资格的证明</h3><p>假设你有有个以太坊钱包，你想要证明这个钱包是真人注册同时不透露注册人的信息。 我们可以用下列数学公式来描述这个场景：</p>
-<ul>
-<li>The <strong>private input</strong> ($w$):your address $A$，and the private key $k$ to your address</li>
-<li>The <strong>public input</strong> ($x$):the set of all addresses with verified proof-of-humanity profiles{$H_1…H_n$}</li>
-<li>The <strong>verification function</strong> $f(x,w)$:<ul>
-<li>$w$ as the pair $(A,k)$, and $x$ as the list of {$H_1…H_n$}</li>
-<li>Verify that $A$ is one of the addresses in $x$</li>
-<li>Verify that $PvToAddr(k) = A$</li>
-<li>Return $Ture$ if both verifications pass, $False$ if either verification fails  </li>
-</ul>
-</li>
-</ul>
-<p>证明者提供他们的地址$A$和他们关联的私钥$k$同时将$w = (A,k)$作为私有输入提供给$f$。他们将从链上获得的已验证用户集{$H_1…H_n$}作为公共输入。他们运行ZK-SNARK证明算法，该算法生成他们的输入是否正确的证明。证明者发送这个证明给验证者，同时他们提供获得经过验证的个人资料列表的区块高度。 </p>
-<p>验证者读取证明者指定的链上这个高度的列表同时检查这个证明。如果检查通过，验证者确信证明者是真人的证明。</p>
-<h3 id="上述会员资格证明的优化"><a href="#上述会员资格证明的优化" class="headerlink" title="上述会员资格证明的优化"></a>上述会员资格证明的优化</h3><p>上述证明系统中存在一个缺陷：验证者需要知道整个用户集合同时他们需要花$O(n)$的时间将起输入到ZK-SNARK机制。<br>我们可以通过将包含所有配置文件的链上Merkle根作为公共输入传递来解决这个问题。我们添加一个Merkle证明证明者的账户位于树的相关部分作为另一个私有输入。 </p>
-<p><img src="merkle_tree.png" alt="merkle_tree"></p>
-<h3 id="代币和ZK-SNARK"><a href="#代币和ZK-SNARK" class="headerlink" title="代币和ZK-SNARK"></a>代币和ZK-SNARK</h3><p>Zcash和Tornado.cash等项目允许您拥有隐私保护的货币。现在你可以根据上面“ZK proof of humanity”，但不是证明他对配置文件的访问权限，而是使用它来证明对代币的访问权限。但是，我们必须解决隐私保护和双花问题。<br>这里我们将要解决他们。拥有代币的人都有一个私人秘密$s$。本地电脑计算这个叶子结点$L = (s, 1)$（这个叶子结点被公布在链上并且成为状态），$N = hash(s,2)$（nulliier)。这个状态会被存在默克尔树上。</p>
-<p>如果想使用这个代币，发送者必须在这里使用ZK-SNARK：</p>
-<ul>
-<li>The <strong>public input</strong> contains a <strong>nullifier</strong> $N$, the current or recent <strong>Merkle root</strong> $R$, and new leaf $l$ ()</li>
-<li>Thw <strong>secret input</strong> contains a secret $s$, a leaf $L$, and a Merkle branch $M$</li>
-<li>The <strong>verification function</strong> checks that;<ul>
-<li>$M$ is a valid branch that proving that $L$ is a leaf in the tree with root $R$, which $R$ is the current Merkle root of the state</li>
-<li>$hash(s,l) = L$</li>
-<li>$hash(s,2) = N$<br>这次交易包含nullifier$n$和一个新叶子$L$，我们无需证明叶子结点</li>
-</ul>
-</li>
-</ul>
-
-                    
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
                         
-
-
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
                     
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/"
+                    data-tooltip="如何用ZK-SNARK保护隐私"
+                    aria-label="下一篇: 如何用ZK-SNARK保护隐私"
+                >
                     
-                        <p>
-                            <a
-                                href="/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/"
-                            aria-label=": 零知识证明(一)，前置知识"
-                        >
-                            零知识证明(一)，前置知识
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2023-09-03T20:06:36+08:00">
-	
-		    2023 年 9 月 3 日
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E/">零知识证明</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h1 id="零知识证明（一），前置知识"><a href="#零知识证明（一），前置知识" class="headerlink" title="零知识证明（一），前置知识"></a>零知识证明（一），前置知识</h1><h2 id="初等数论"><a href="#初等数论" class="headerlink" title="初等数论"></a>初等数论</h2><h2 id="初等群论"><a href="#初等群论" class="headerlink" title="初等群论"></a>初等群论</h2><h2 id="基本密码学原语"><a href="#基本密码学原语" class="headerlink" title="基本密码学原语"></a>基本密码学原语</h2><h3 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h3><h3 id="加密和签名方案"><a href="#加密和签名方案" class="headerlink" title="加密和签名方案"></a>加密和签名方案</h3><h3 id="密码累加器"><a href="#密码累加器" class="headerlink" title="密码累加器"></a>密码累加器</h3><h2 id="代数-多项式基础"><a href="#代数-多项式基础" class="headerlink" title="代数-多项式基础"></a>代数-多项式基础</h2><h3 id="多项式的基本操作"><a href="#多项式的基本操作" class="headerlink" title="多项式的基本操作"></a>多项式的基本操作</h3><h3 id="多项式乘法和除法"><a href="#多项式乘法和除法" class="headerlink" title="多项式乘法和除法"></a>多项式乘法和除法</h3><h3 id="拉格朗日插值概率多项式恒等式测试域扩展"><a href="#拉格朗日插值概率多项式恒等式测试域扩展" class="headerlink" title="拉格朗日插值概率多项式恒等式测试域扩展"></a>拉格朗日插值概率多项式恒等式测试域扩展</h3><h3 id="快速傅立叶变换"><a href="#快速傅立叶变换" class="headerlink" title="快速傅立叶变换"></a>快速傅立叶变换</h3>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
+                        <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
             <a
-                href="/2023/09/03/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E4%B8%80-%EF%BC%8C%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/"
-                aria-label=": 零知识证明(一)，前置知识"
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Diesen Beitrag teilen"
             >
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" src=""/>
-                </div>
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
-            
+        </li>
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2023/09/03/Elliptci-curve-cryptography/"
-                            aria-label=": Elliptci curve cryptography"
-                        >
-                            Elliptci curve cryptography
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2023-09-03T11:31:15+08:00">
-	
-		    2023 年 9 月 3 日
-    	
-    </time>
-    
-        <span>发布在 </span>
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                    title="分享到 Facebook"
+                    aria-label="分享到 Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    <a class="category-link" href="/categories/Cryptography/">Cryptography</a>
-
-
-    
-</div>
-
-            </div>
             
-                <div class="postShorten-content">
-                    <h2 id="Elliptic-curve-cryptography-ECC"><a href="#Elliptic-curve-cryptography-ECC" class="headerlink" title="Elliptic curve cryptography(ECC)"></a>Elliptic curve cryptography(ECC)</h2><p>椭圆曲线加密是一种加密数据方法，只有特定人，才能对其进行解密。它在现实生活中有许多应用场景，但其主要应用在于加密互联网上的数据与流量。例如，椭圆加密曲线可以用于确保一封邮件何时发送，且除了收件人外无人可以读取该邮件。</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2023/09/03/Elliptci-curve-cryptography/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
             
-        </div>
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                    title="分享到 Twitter"
+                    aria-label="分享到 Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/2023/08/29/Welcome/"
-                            aria-label=": Welcome"
-                        >
-                            Welcome
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2023-08-29T11:50:41+08:00">
-	
-		    2023 年 8 月 29 日
-    	
-    </time>
-    
-</div>
-
-            </div>
             
-                <div class="postShorten-content">
-                    
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/2023/08/29/Welcome/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                    title="分享到 Google+"
+                    aria-label="分享到 Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
         
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -740,6 +555,151 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a
+                        class="post-action-btn btn btn--disabled"
+                        aria-hidden="true"
+                    >
+                        
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/2023/09/08/%E5%A6%82%E4%BD%95%E7%94%A8ZK-SNARK%E4%BF%9D%E6%8A%A4%E9%9A%90%E7%A7%81/"
+                    data-tooltip="如何用ZK-SNARK保护隐私"
+                    aria-label="下一篇: 如何用ZK-SNARK保护隐私"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Diesen Beitrag teilen"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                    title="分享到 Facebook"
+                    aria-label="分享到 Facebook"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                    title="分享到 Twitter"
+                    aria-label="分享到 Twitter"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                    title="分享到 Google+"
+                    aria-label="分享到 Google+"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                        aria-label="分享到 Facebook"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                        aria-label="分享到 Twitter"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=http://example.com/2024/04/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8E%E5%AF%86%E7%A0%81%E5%AD%A6/"
+                        aria-label="分享到 Google+"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -789,6 +749,8 @@
 
 <!--SCRIPTS END-->
 
+
+    
 
 
 
